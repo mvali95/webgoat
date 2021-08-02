@@ -13,8 +13,8 @@ pipeline {
           steps{
         withCodeQL(codeql:'codeql') {
             sh 'codeql --version'
-            sh 'codeql database create webgoat --language=java --overwrite'
-            sh 'codeql database analyze webgoat java-code-scanning.qls --sarif-category=java --format=sarif-latest --output=webgoat.sarif' //using the rules installed, analyse the goof app to see results and output in SARIF
+            sh 'codeql database create webgoat --language=javascript --overwrite'
+            sh 'codeql database analyze webgoat java-code-scanning.qls --sarif-category=javascript --format=sarif-latest --output=webgoat.sarif' //using the rules installed, analyse the goof app to see results and output in SARIF
             sh 'ls -la'
          }
          }
