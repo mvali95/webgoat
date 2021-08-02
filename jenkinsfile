@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/mvali95/webgoat']]])
+                sh 'ls -la'
+            }
+        }
+        
+        stage('codeql') {
+          steps{
+        withCodeQL(codeql:'codeql') {
+            sh 'codeql --version'
+         }
+         }
+        }
+       
+    }
+}
